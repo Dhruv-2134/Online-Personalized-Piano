@@ -6,12 +6,14 @@ const pianoKeys = document.querySelectorAll(".piano-keys .key"),
 
 const keymap = new Map();
 //by default, audio src is "a" tune.
-let allKeys = [],
-    audio = new Audio("tunes/a.mp3");
+let allKeys = [];
+let audiomap = new Map(); 
+    // audio = new Audio("tunes/a.mp3");
 
 const playTune = (key) => {
+    const audio = audiomap.get(key);
     console.log(key, "on");
-    audio.src = `tunes/${key}.mp3`; //passing the audio src based on the key
+    // audio.src = `tunes/${key}.mp3`; //passing the audio src based on the key
     audio.play(); //playing audio
     // audio.onended = () => { //removing active class after audio ends
     //     audio.play();
@@ -40,6 +42,7 @@ pianoKeys.forEach(key => {
         console.log("mouse leaved");
         playOffTune(key.dataset.key);
     });
+    audiomap.set(key.dataset.key, new Audio(`tunes/${key.dataset.key}.mp3`));
 });
 
 document.addEventListener("keyup", (key) => {
@@ -98,6 +101,7 @@ async function playKeyDownTune(key) {
 }
 
 async function playOffTune(key) {
+    const audio = audiomap.get(key);
     console.log(key, "off");
     audio.onended = () => {};
     await wait(500);
