@@ -10,6 +10,11 @@ let allKeys = [];
 let audiomap = new Map(); 
     // audio = new Audio("tunes/a.mp3");
 
+Audio.prototype.stop = function () {
+    this.pause();
+    this.currentTime = 0.0;
+}
+
 const playTune = (key) => {
     const audio = audiomap.get(key);
     console.log(key, "on");
@@ -105,7 +110,7 @@ async function playOffTune(key) {
     console.log(key, "off");
     audio.onended = () => {};
     await wait(500);
-    audio.pause();
+    audio.stop();
     const clickedKey = document.querySelector(`[data-key="${key}"]`);
     clickedKey.classList.remove("active");
 }
