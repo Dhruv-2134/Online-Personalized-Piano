@@ -10,6 +10,8 @@ let allKeys = [];
 let audiomap = new Map(); 
     // audio = new Audio("tunes/a.mp3");
 
+var type = "tunes";
+
 Audio.prototype.stop = function () {
     this.pause();
     this.currentTime = 0.0;
@@ -89,6 +91,11 @@ const showHideKeys = () => {
 
 keysCheckbox.addEventListener("click", showHideKeys);
 volumeSlider.addEventListener("input", handleVolume);
+
+const intype = document.querySelector("#intype");
+intype.addEventListener("change", (e) => {
+    changetype(e.target.value);
+});
 // document.addEventListener("keydown", pressedKey);
 
 function playKeyUpTune(key) {
@@ -119,3 +126,14 @@ const wait= async (ms) => {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+function changetype(t){
+    if (t == "piano") {
+        type = "tunes";
+    }
+    else {
+        type = "guitartune";
+    }
+    pianoKeys.forEach(key => {
+        audiomap.set(key.dataset.key, new Audio(`${type}/${key.dataset.key}.mp3`));
+    });
+}

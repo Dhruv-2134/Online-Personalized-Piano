@@ -27,6 +27,13 @@
                 <div class="coloumn volume-slider">
                     <span>Volume</span> <input type="range" min="0" max="1" value="0.5" step="any">
                 </div>
+                <!-- jo bhi input lega uska id intype rahega -->
+                <label for="type">Instrument</label>
+                <input list="type" name="instrument" id="intype">
+                <datalist id="type">
+                    <option value="piano">
+                    <option value="guitar">
+                </datalist>
                 <div class="coloumn keys-checkbox">
                     <span>Show Keys</span> <input type="checkbox" checked>
                 </div>
