@@ -32,6 +32,14 @@ pianoKeys.forEach(key => {
     // key.addEventListener("click", () => playTune(key.dataset.key));
     // key.addEventListener("keyup", playKeyUpTune(key.dataset.key));
     // key.addEventListener("keydown", playKeyDownTune(key.dataset.key));
+    key.addEventListener("mousedown", () => {
+        console.log("mouse triggered");
+        playTune(key.dataset.key);
+    });
+    key.addEventListener("mouseup", () => {
+        console.log("mouse leaved");
+        playOffTune(key.dataset.key);
+    });
 });
 
 document.addEventListener("keyup", (key) => {
